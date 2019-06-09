@@ -48,21 +48,17 @@ module Itamae
             return
           end
 
-          yay_executable = run_command('which yay').exit_status == 0
+          yay_executable = run_command('which yay', error: false).exit_status == 0
           if yay_executable
             run_command("yay -S --noconfirm #{attributes.options} #{attributes.name}")
           else
             name = attributes.name
             tmp_dir = "/tmp/itamae-plugin-resource-aur_package-#{name}-#{Time.now.to_f}"
-            run_command(<<~SHELL)
-              mkdir #{tmp_dir} &&
-              cd #{tmp_dir} &&
-              curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/#{name}.tar.gz &&
-              tar -xvf #{name}.tar.gz &&
-              cd #{name} &&
-              makepkg -si --noconfirm #{attributes.options} &&
-              rm -rf #{tmp_dir}
-            SHELL
+            run_command("mkdir #{tmp_dir}")
+            run_command("curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/#{name}.tar.gz", cwd: tmp_dir)
+            run_command("tar -xvf #{name}.tar.gz", cwd: tmp_dir)
+            run_command("makepkg -si --noconfirm #{attributes.options}", cwd: "#{tmp_dir}/#{name}" )
+            run_command("rm -rf #{tmp_dir}")
           end
           updated!
         end
