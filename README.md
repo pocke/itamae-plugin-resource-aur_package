@@ -1,8 +1,6 @@
 # Itamae::Plugin::Resource::AurPackage
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/itamae/plugin/resource/aur_package`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+An Itamae resource for AUR (Arch User Repository)
 
 ## Installation
 
@@ -22,7 +20,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+aur_package 'rbenv'
+```
+
+Note: It uses `yay` if it is available. If not, it uses `makepkg`.
 
 ## Development
 
