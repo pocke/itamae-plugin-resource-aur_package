@@ -60,7 +60,8 @@ module Itamae
               curl -L -O https://aur.archlinux.org/cgit/aur.git/snapshot/#{name}.tar.gz &&
               tar -xvf #{name}.tar.gz &&
               cd #{name} &&
-              makepkg -si --noconfirm #{attributes.options}
+              makepkg -si --noconfirm #{attributes.options} &&
+              rm -rf #{tmp_dir}
             SHELL
           end
           updated!
