@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{An Itamae resource for AUR}
   spec.description   = %q{An Itamae resource for AUR (Arch User Repository)}
   spec.homepage      = "https://github.com/pocke/itamae-plugin-resource-aur_package"
+  spec.license       = 'CC-0-1.0'
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
